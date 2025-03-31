@@ -29,12 +29,15 @@ switch ($command) {
     "test" {
         go test -v ./...
     }
-    "mongo" {
-        mongo up
-    }
     "openapi" {
         docker run --rm -ti -v ${ProjectRoot}:/local openapitools/openapi-generator-cli generate -c /local/scripts/generator-cfg.yaml
     }
+    "mongo" {
+        mongo up
+    }
+    "docker" {
+         docker build -t xsaraka/ambulance-wl-webapi:local-build -f ${ProjectRoot}/build/docker/Dockerfile .
+   }
     default {
         throw "Unknown command: $command"
     }
